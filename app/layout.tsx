@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
 
 const sans = Source_Sans_3({ subsets: ["latin"], variable: "--font-source" });
@@ -20,7 +21,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tibetan:wght@400;600&display=swap" rel="stylesheet" />
       </head>
-      <body className="min-h-full bg-[#f6f3ec] text-[#1d332c] antialiased" style={{ fontFamily: "var(--font-source), sans-serif" }}>{children}</body>
+      <body className="min-h-full bg-background text-foreground antialiased" style={{ fontFamily: "var(--font-source), sans-serif" }}>
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
     </html>
   );
 }

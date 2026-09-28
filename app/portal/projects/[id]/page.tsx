@@ -1,4 +1,10 @@
 import { notFound } from "next/navigation";
+import { PortalShell } from "@/components/portal-shell";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
+import { Progress } from "@/components/ui/progress";
 import { requireClient } from "@/lib/data";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
@@ -17,30 +23,57 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     return { ...file, url: signed?.data?.signedUrl };
   }));
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="font-serif text-4xl text-[#14382c]">{project.name}</h1>
-      <p className="mt-3">{project.summary}</p>
-      <h2 className="mt-8 font-serif text-2xl">Files</h2>
-      <ul className="mt-3 space-y-2">
-        {links.map((file) => (
-          <li key={file.id}>{file.url ? <a className="underline" href={file.url}>{file.name}</a> : file.name}</li>
-        ))}
-      </ul>
-      <h2 className="mt-8 font-serif text-2xl">Invoices</h2>
-      <ul className="mt-3 space-y-3">
+    <PortalShell title={project.name}>
+      <Card className="overflow-hidden p-0">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+          <CardHeader className="p-6">
+            <CardTitle className="font-serif text-3xl">{project.name}</CardTitle>
+            <CardDescription>{project.summary}</CardDescription>
+          </CardHeader>
+          <img src="/infographics/world-map.svg" alt="Global reach" className="h-full max-h-48 w-full bg-muted object-contain p-4" />
+        </div>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Files</CardTitle>
+          <CardDescription>{links.length ? `${links.length} file${links.length === 1 ? "" : "s"} shared with you.` : "No files have been uploaded yet."}</CardDescription>
+        </CardHeader>
+        <CardContent className="gap-2">
+          {links.length === 0 ? (
+            <Empty>
+              <EmptyHeader>
+                <EmptyTitle>No files</EmptyTitle>
+                <EmptyDescription>The firm will add documents here when they are ready to share.</EmptyDescription>
+              </EmptyHeader>
+            </Empty>
+          ) : links.map((file) => (
+            <div key={file.id}>
+              {file.url ? <Button nativeButton={false} render={<a href={file.url} />} variant="link">{file.name}</Button> : <span className="text-sm">{file.name}</span>}
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+      <div className="grid gap-4">
         {(invoices || []).map((invoice) => (
-          <li key={invoice.id} className="rounded-xl border bg-white p-4">
-            <p>{invoice.title} · {(invoice.amount_cents / 100).toFixed(2)} {invoice.currency.toUpperCase()} · {invoice.status}</p>
-            {invoice.status === "open" && process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ? (
-              <form action={payInvoice}>
-                <input type="hidden" name="invoice_id" value={invoice.id} />
-                <button className="mt-2 rounded-full bg-[#e36b1e] px-4 py-2 text-sm text-white" type="submit">Pay</button>
-              </form>
-            ) : null}
-          </li>
+          <Card key={invoice.id}>
+            <CardHeader>
+              <CardTitle>{invoice.title}</CardTitle>
+              <CardDescription>{(invoice.amount_cents / 100).toFixed(2)} {invoice.currency.toUpperCase()}</CardDescription>
+            </CardHeader>
+            <CardContent className="gap-3">
+              <Badge variant="secondary">{invoice.status}</Badge>
+              <Progress value={invoice.status === "paid" ? 100 : invoice.status === "open" ? 66 : 20} />
+              {invoice.status === "open" && process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ? (
+                <form action={payInvoice}>
+                  <input type="hidden" name="invoice_id" value={invoice.id} />
+                  <Button type="submit">Pay</Button>
+                </form>
+              ) : null}
+            </CardContent>
+          </Card>
         ))}
-      </ul>
-    </main>
+      </div>
+    </PortalShell>
   );
 }
 

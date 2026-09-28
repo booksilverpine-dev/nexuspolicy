@@ -135,7 +135,10 @@ export async function createInvoice(formData: FormData) {
   const amount = Math.round(Number(formData.get("amount") || 0) * 100);
   const { data: invoice } = await admin.from("invoices").insert({
     organization_id: String(formData.get("organization_id")),
-    project_id: String(formData.get("project_id") || "") || null,
+    project_id: (() => {
+      const projectId = String(formData.get("project_id") || "");
+      return projectId && projectId !== "none" ? projectId : null;
+    })(),
     title: String(formData.get("title") || "Invoice"),
     amount_cents: amount,
     currency: "usd",

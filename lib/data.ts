@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
@@ -162,11 +164,19 @@ export async function requireClient() {
   return { user: client, organizationId: profile!.organization_id as string };
 }
 
-export function publicAssetUrl(path: string | null) {
-  if (!path) return null;
-  if (path.startsWith("/")) return path;
+export function publicAssetUrl(assetPath: string | null) {
+  if (!assetPath) return null;
+  if (assetPath.startsWith("/")) return assetPath;
   const base = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  return `${base}/storage/v1/object/public/${path}`;
+  return `${base}/storage/v1/object/public/${assetPath}`;
+}
+
+export function existingPublicAsset(assetPath: string | null) {
+  const url = publicAssetUrl(assetPath);
+  if (!url) return null;
+  if (!assetPath?.startsWith("/")) return url;
+  const file = path.join(process.cwd(), "public", assetPath.replace(/^\//, ""));
+  return fs.existsSync(file) ? url : null;
 }
 
 export async function allowRate(bucket: string, key: string, windowMs: number) {

@@ -1,13 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function ErrorPage() {
   return (
-    <main className="mx-auto max-w-lg px-4 py-24 text-center">
-      <h1 className="font-serif text-4xl text-[#14382c]">Something went wrong</h1>
-      <p className="mt-3 text-[#3d5248]">The page could not be shown. You can return home and try again.</p>
-      <Link href="/en" className="mt-6 inline-flex rounded-full bg-[#e36b1e] px-5 py-3 text-white">Back to home</Link>
+    <main className="mx-auto flex min-h-svh max-w-lg items-center px-4">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="font-serif text-3xl">Something went wrong</CardTitle>
+          <CardDescription>The page could not be shown. You can return home and try again.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button nativeButton={false} render={<Link href="/en" />}>Back to home</Button>
+        </CardContent>
+      </Card>
     </main>
   );
 }

@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -39,21 +42,26 @@ export function ChatWidget() {
   return (
     <div className="fixed right-4 bottom-4 z-40">
       {open ? (
-        <div className="mb-3 flex h-96 w-[min(100vw-2rem,22rem)] flex-col rounded-2xl border border-[#e4ddd0] bg-white shadow-lg">
-          <div className="border-b px-4 py-3 text-sm font-medium text-[#14382c]">Ask Eco Policy Nexus</div>
-          <div className="flex-1 space-y-3 overflow-y-auto p-4 text-sm">
+        <Card className="mb-3 flex h-96 w-[min(100vw-2rem,22rem)] flex-col">
+          <CardHeader>
+            <CardTitle>Ask Eco Policy Nexus</CardTitle>
+          </CardHeader>
+          <Separator />
+          <CardContent className="flex min-h-0 flex-1 flex-col">
+          <div className="flex-1 space-y-3 overflow-y-auto text-sm">
             {messages.map((message, index) => (
               <p key={index} className={message.role === "user" ? "text-right text-[#14382c]" : "text-[#3d5248]"}>
                 {message.content}
               </p>
             ))}
           </div>
-          <form onSubmit={send} className="flex gap-2 border-t p-3">
+          <form onSubmit={send} className="mt-3 flex gap-2">
             <label className="sr-only" htmlFor="chat-input">Question</label>
-            <input id="chat-input" value={input} onChange={(event) => setInput(event.target.value)} className="h-10 flex-1 rounded-full border px-3 text-sm" maxLength={1000} />
-            <Button type="submit" disabled={pending} className="bg-[#14382c] text-white">Send</Button>
+            <Input id="chat-input" value={input} onChange={(event) => setInput(event.target.value)} maxLength={1000} />
+            <Button type="submit" disabled={pending}>Send</Button>
           </form>
-        </div>
+          </CardContent>
+        </Card>
       ) : null}
       <Button type="button" onClick={() => setOpen((value) => !value)} className="bg-[#e36b1e] text-white hover:bg-[#cf5c12]">
         {open ? "Close" : "Ask"}

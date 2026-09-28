@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { ArrowRight, Briefcase, ChartColumn, Globe, Leaf, Users } from "lucide-react";
-import { firm, heroValues, services } from "@/content/site";
-import { displayValue, getIndicators, getPublishedInsights, publicAssetUrl, type Indicator, type Insight } from "@/lib/data";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { about, firm, heroValues, reasons, services } from "@/content/site";
+import { approach, audiences } from "@/content/pages";
+import { GlobeFilm } from "@/components/globe-film";
+import { PracticeMap, StepRail } from "@/components/visuals";
+import { displayValue, getIndicators, getPublishedInsights, publicAssetUrl, type Indicator } from "@/lib/data";
 import { loc } from "@/lib/paths";
 
 const icons = { chart: ChartColumn, leaf: Leaf, users: Users, briefcase: Briefcase, globe: Globe, sdg: Globe };
@@ -11,14 +16,14 @@ export async function HomePage({ locale, labels }: { locale: string; labels: Rec
   return (
     <div>
       <section className="relative min-h-[540px] overflow-hidden">
-        <img src="/infographics/hero.webp" alt="Illustrated Bhutanese valley with a dzong, river, and prayer flags" className="absolute inset-0 h-full w-full object-cover" />
+        <img src="/infographics/work-hero.png" alt="Advisers reviewing charts in a policy meeting" className="absolute inset-0 h-full w-full object-cover" />
         <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
           <div className="max-w-xl rounded-2xl bg-[#f6f3ec]/85 p-6">
             <h1 className="font-serif text-4xl leading-tight text-[#14382c] md:text-5xl">Bridging Policy, People and Planet for a Sustainable Tomorrow</h1>
             <p className="mt-4 text-[#243f36]">{firm.description}</p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link href={loc(locale, "/about")} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#e36b1e] px-5 py-3 text-sm font-medium text-white">{labels.aboutCta} <ArrowRight className="size-4" /></Link>
-              <Link href={loc(locale, "/services")} className="inline-flex items-center justify-center gap-2 rounded-full border border-[#14382c] bg-white px-5 py-3 text-sm font-medium text-[#14382c]">{labels.servicesCta} <ArrowRight className="size-4" /></Link>
+              <Button nativeButton={false} render={<Link href={loc(locale, "/about")} />} className="bg-[#e36b1e] text-white hover:bg-[#cf5c12]">{labels.aboutCta} <ArrowRight /></Button>
+              <Button nativeButton={false} render={<Link href={loc(locale, "/services")} />} variant="outline">{labels.servicesCta} <ArrowRight /></Button>
             </div>
           </div>
           <ul className="rounded-2xl bg-[#14382c]/90 p-4 text-[#f6f3ec]">
@@ -38,28 +43,39 @@ export async function HomePage({ locale, labels }: { locale: string; labels: Rec
         {services.map((service) => {
           const Icon = icons[service.icon as keyof typeof icons] || Globe;
           return (
-            <article key={service.slug} className="rounded-2xl border border-[#e6e0d4] bg-white p-5">
-              <Icon className={`size-8 ${service.accent}`} />
-              <h2 className="mt-4 font-serif text-lg text-[#14382c]">{service.title}</h2>
-              <p className="mt-2 text-sm text-[#4d6258]">{service.summary}</p>
-              <Link href={loc(locale, `/services/${service.slug}`)} className={`mt-4 inline-flex items-center gap-1 text-sm font-medium ${service.accent}`}>{labels.learnMore} <ArrowRight className="size-4" /></Link>
-            </article>
+            <Card key={service.slug}>
+              <CardHeader>
+                <Icon className={`size-8 ${service.accent}`} />
+                <CardTitle className="font-serif text-lg">{service.title}</CardTitle>
+                <CardDescription>{service.summary}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button nativeButton={false} render={<Link href={loc(locale, `/services/${service.slug}`)} />} variant="link" className={service.accent}>{labels.learnMore} <ArrowRight /></Button>
+              </CardContent>
+            </Card>
           );
         })}
       </section>
       <section className="mx-auto grid max-w-7xl gap-4 px-4 pb-12 lg:grid-cols-3">
-        <div className="rounded-2xl border border-[#e6e0d4] bg-white p-5 lg:col-span-1">
-          <h2 className="text-xs font-semibold tracking-wide text-[#6b7c74]">ECONOMIC & SOCIAL INDICATORS</h2>
+        <Card className="lg:col-span-1">
+          <CardHeader>
+            <CardTitle className="text-xs font-semibold tracking-wide text-muted-foreground">ECONOMIC & SOCIAL INDICATORS</CardTitle>
+          </CardHeader>
+          <CardContent>
           <div className="mt-4 grid grid-cols-2 gap-3">
             {indicators.slice(0, 8).map((item) => (
               <Stat key={item.id} item={item} />
             ))}
           </div>
           <p className="mt-3 text-xs text-[#6b7c74]">Figures are illustrative or sourced. They are not official government statistics.</p>
-          <Link href={loc(locale, "/indicators")} className="mt-4 flex items-center justify-center gap-2 rounded-full bg-[#14382c] px-4 py-3 text-sm text-white">{labels.dashboard} <ArrowRight className="size-4" /></Link>
-        </div>
-        <div className="rounded-2xl border border-[#e6e0d4] bg-white p-5">
-          <h2 className="text-xs font-semibold tracking-wide text-[#6b7c74]">FEATURED INSIGHTS</h2>
+          <Button nativeButton={false} render={<Link href={loc(locale, "/indicators")} />} className="mt-4 w-full">{labels.dashboard} <ArrowRight /></Button>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xs font-semibold tracking-wide text-muted-foreground">FEATURED INSIGHTS</CardTitle>
+          </CardHeader>
+          <CardContent>
           <ul className="mt-4 space-y-4">
             {insights.slice(0, 3).map((insight) => (
               <li key={insight.id}>
@@ -73,14 +89,62 @@ export async function HomePage({ locale, labels }: { locale: string; labels: Rec
               </li>
             ))}
           </ul>
-          <Link href={loc(locale, "/insights")} className="mt-4 inline-flex text-sm font-medium text-[#14382c]">{labels.allInsights} <ArrowRight className="size-4" /></Link>
+          <Button nativeButton={false} render={<Link href={loc(locale, "/insights")} />} variant="link" className="mt-4">{labels.allInsights} <ArrowRight /></Button>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xs font-semibold tracking-wide text-muted-foreground">OUR GLOBAL REACH</CardTitle>
+            <CardDescription>Proudly based in Bhutan, we collaborate across Asia and beyond to co-create sustainable, context-specific and impact-driven solutions.</CardDescription>
+          </CardHeader>
+          <CardContent>
+          <GlobeFilm className="mt-4 w-full rounded-xl" />
+          <Button nativeButton={false} render={<Link href={loc(locale, "/about#global")} />} variant="link" className="mt-4">{labels.engagement} <ArrowRight /></Button>
+          </CardContent>
+        </Card>
+      </section>
+      <section className="mx-auto max-w-7xl px-4 py-12">
+        <h2 className="font-serif text-3xl text-[#14382c]">Why this firm</h2>
+        <p className="mt-3 max-w-3xl text-[#3d5248]">{about.belief}</p>
+        <ul className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+          {reasons.map((reason) => (
+            <li key={reason.title}>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="font-serif text-lg">{reason.title}</CardTitle>
+                  <CardDescription>{reason.body}</CardDescription>
+                </CardHeader>
+              </Card>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section className="bg-white py-12">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="font-serif text-3xl text-[#14382c]">How an assignment moves</h2>
+          <p className="mt-3 max-w-3xl text-[#3d5248]">Five steps keep local context, evidence, and delivery in one line of work.</p>
+          <div className="mt-6">
+            <StepRail steps={approach} />
+          </div>
         </div>
-        <div className="rounded-2xl border border-[#e6e0d4] bg-white p-5">
-          <h2 className="text-xs font-semibold tracking-wide text-[#6b7c74]">OUR GLOBAL REACH</h2>
-          <p className="mt-3 text-sm text-[#4d6258]">Proudly based in Bhutan, we collaborate across Asia and beyond to co-create sustainable, context-specific and impact-driven solutions.</p>
-          <img src="/infographics/world-map.svg" alt="Map with pins for Asia, Africa, Europe, Pacific, and the Americas" className="mt-4 w-full" />
-          <Link href={loc(locale, "/about#global")} className="mt-4 inline-flex text-sm font-medium text-[#14382c]">{labels.engagement} <ArrowRight className="size-4" /></Link>
+      </section>
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+        <div>
+          <h2 className="font-serif text-3xl text-[#14382c]">Who the work is for</h2>
+          <ul className="mt-6 space-y-3">
+            {audiences.map((audience) => (
+              <li key={audience.title}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="font-serif text-lg">{audience.title}</CardTitle>
+                    <CardDescription>{audience.body}</CardDescription>
+                  </CardHeader>
+                </Card>
+              </li>
+            ))}
+          </ul>
         </div>
+        <PracticeMap />
       </section>
     </div>
   );
@@ -89,11 +153,13 @@ export async function HomePage({ locale, labels }: { locale: string; labels: Rec
 function Stat({ item }: { item: Indicator }) {
   const Icon = icons[item.icon as keyof typeof icons] || ChartColumn;
   return (
-    <div className="rounded-xl border border-[#eee6da] p-3">
+    <Card size="sm">
+      <CardContent>
       <Icon className="size-4 text-[#2f8f4e]" />
       <p className="mt-2 text-xs text-[#6b7c74]">{item.label}</p>
       <p className="font-serif text-xl text-[#14382c]">{displayValue(item)}</p>
-      <p className="text-xs text-[#6b7c74]">{item.period}</p>
-    </div>
+      <p className="text-xs text-muted-foreground">{item.period}</p>
+      </CardContent>
+    </Card>
   );
 }

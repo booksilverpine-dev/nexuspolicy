@@ -1,5 +1,11 @@
 import { notFound } from "next/navigation";
 import { AdminShell } from "@/components/admin-shell";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { requireStaff } from "@/lib/data";
 import { createClient } from "@/lib/supabase/server";
 import { deleteInsight, saveInsight } from "../../actions";
@@ -12,21 +18,51 @@ export default async function EditInsight({ params }: { params: Promise<{ id: st
   if (!data) notFound();
   return (
     <AdminShell title="Edit insight">
-      <form action={saveInsight} className="grid max-w-xl gap-3">
+      <Card>
+        <CardHeader>
+          <CardTitle>{data.title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form action={saveInsight}>
+            <FieldGroup className="gap-4">
+              <input type="hidden" name="id" value={data.id} />
+              <input type="hidden" name="cover_path" value={data.cover_path || ""} />
+              <Field>
+                <FieldLabel htmlFor="title">Title</FieldLabel>
+                <Input id="title" name="title" defaultValue={data.title} />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="slug">Slug</FieldLabel>
+                <Input id="slug" name="slug" defaultValue={data.slug} />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="published_on">Date</FieldLabel>
+                <Input id="published_on" name="published_on" type="date" defaultValue={data.published_on} />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="excerpt">Excerpt</FieldLabel>
+                <Textarea id="excerpt" name="excerpt" defaultValue={data.excerpt} />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="body">Body</FieldLabel>
+                <Textarea id="body" name="body" defaultValue={data.body} className="min-h-40" />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="cover">Replace cover</FieldLabel>
+                <Input id="cover" name="cover" type="file" accept="image/png,image/jpeg,image/webp" />
+              </Field>
+              <Field orientation="horizontal">
+                <Checkbox id="published" name="published" value="on" defaultChecked={data.published} />
+                <FieldLabel htmlFor="published">Published</FieldLabel>
+              </Field>
+              <Button type="submit" className="w-fit">Save</Button>
+            </FieldGroup>
+          </form>
+        </CardContent>
+      </Card>
+      <form action={deleteInsight}>
         <input type="hidden" name="id" value={data.id} />
-        <input type="hidden" name="cover_path" value={data.cover_path || ""} />
-        <input name="title" defaultValue={data.title} className="h-10 rounded-md border px-3" />
-        <input name="slug" defaultValue={data.slug} className="h-10 rounded-md border px-3" />
-        <input name="published_on" type="date" defaultValue={data.published_on} className="h-10 rounded-md border px-3" />
-        <textarea name="excerpt" defaultValue={data.excerpt} className="rounded-md border p-3" />
-        <textarea name="body" defaultValue={data.body} className="min-h-40 rounded-md border p-3" />
-        <input name="cover" type="file" accept="image/png,image/jpeg,image/webp" />
-        <label className="text-sm"><input type="checkbox" name="published" defaultChecked={data.published} /> Published</label>
-        <button className="w-fit rounded-full bg-[#14382c] px-4 py-2 text-white" type="submit">Save</button>
-      </form>
-      <form action={deleteInsight} className="mt-4">
-        <input type="hidden" name="id" value={data.id} />
-        <button className="text-sm text-red-700" type="submit">Delete</button>
+        <Button type="submit" variant="destructive">Delete</Button>
       </form>
     </AdminShell>
   );

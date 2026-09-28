@@ -1,4 +1,10 @@
 import { AdminShell } from "@/components/admin-shell";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { requireStaff } from "@/lib/data";
 import { createClient } from "@/lib/supabase/server";
 import { createOrganization } from "../actions";
@@ -10,14 +16,59 @@ export default async function OrganizationsAdmin({ searchParams }: { searchParam
   const { data } = await supabase.from("organizations").select("id, name").order("created_at", { ascending: false });
   return (
     <AdminShell title="Organizations">
-      {query.error ? <p className="mb-4 text-sm text-red-700">The client account could not be created.</p> : null}
-      {query.created ? <p className="mb-4 rounded-lg bg-[#f3e2c4] p-3 text-sm">Client {query.created} can sign in with password {query.password}. Share it once, then ask them to change it.</p> : null}
-      <ul className="space-y-1">{(data || []).map((org) => <li key={org.id}>{org.name}</li>)}</ul>
-      <form action={createOrganization} className="mt-6 grid max-w-md gap-3">
-        <input name="name" required placeholder="Organization" className="h-10 rounded-md border px-3" />
-        <input name="email" type="email" required placeholder="Client email" className="h-10 rounded-md border px-3" />
-        <button className="w-fit rounded-full bg-[#14382c] px-4 py-2 text-white" type="submit">Invite client</button>
-      </form>
+      {query.error ? (
+        <Alert variant="destructive">
+          <AlertTitle>Could not create the client</AlertTitle>
+          <AlertDescription>The client account could not be created.</AlertDescription>
+        </Alert>
+      ) : null}
+      {query.created ? (
+        <Alert>
+          <AlertTitle>Client invited</AlertTitle>
+          <AlertDescription>Client {query.created} can sign in with password {query.password}. Share it once, then ask them to change it.</AlertDescription>
+        </Alert>
+      ) : null}
+      <Card>
+        <CardHeader>
+          <CardTitle>Organizations</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {(data || []).map((org) => (
+                <TableRow key={org.id}>
+                  <TableCell>{org.name}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Invite a client</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form action={createOrganization}>
+            <FieldGroup className="gap-4">
+              <Field>
+                <FieldLabel htmlFor="name">Organization</FieldLabel>
+                <Input id="name" name="name" required placeholder="Organization" />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="email">Client email</FieldLabel>
+                <Input id="email" name="email" type="email" required placeholder="Client email" />
+              </Field>
+              <Button type="submit" className="w-fit">Invite client</Button>
+            </FieldGroup>
+          </form>
+        </CardContent>
+      </Card>
     </AdminShell>
   );
 }

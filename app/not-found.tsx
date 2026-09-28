@@ -1,11 +1,19 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function NotFound() {
   return (
-    <main className="mx-auto max-w-lg px-4 py-24 text-center">
-      <h1 className="font-serif text-4xl text-[#14382c]">Page not found</h1>
-      <p className="mt-3 text-[#3d5248]">That address is not on this site.</p>
-      <Link href="/en" className="mt-6 inline-flex rounded-full bg-[#e36b1e] px-5 py-3 text-white">Back to home</Link>
+    <main className="mx-auto flex min-h-svh max-w-lg items-center px-4">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="font-serif text-3xl">Page not found</CardTitle>
+          <CardDescription>That address is not on this site.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button nativeButton={false} render={<Link href="/en" />}>Back to home</Button>
+        </CardContent>
+      </Card>
     </main>
   );
 }
