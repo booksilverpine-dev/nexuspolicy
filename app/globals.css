@@ -124,6 +124,20 @@
 .rich-copy li { margin-top: 0.35rem; line-height: 1.6; }
 .rich-copy strong { color: #14382c; }
 
+@media (prefers-reduced-motion: no-preference) {
+  .svc-bar { transform-origin: left center; animation: svc-grow 0.9s ease both; }
+  .svc-rise { transform-origin: bottom center; animation: svc-rise 0.8s ease both; }
+  .svc-pop { animation: svc-pop 0.6s ease both; }
+  .svc-draw { stroke-dasharray: 140; stroke-dashoffset: 140; animation: svc-draw 1s ease forwards; }
+  .svc-delay { animation-delay: 0.15s; }
+  .svc-delay-2 { animation-delay: 0.3s; }
+  .svc-delay-3 { animation-delay: 0.45s; }
+}
+@keyframes svc-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes svc-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes svc-pop { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes svc-draw { to { stroke-dashoffset: 0; } }
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

@@ -19,7 +19,7 @@ export default function ContactPage() {
             <li><a href={`mailto:${firm.email}`} className="underline">{firm.email}</a></li>
             <li className="text-[#6b7c74]">{firm.contactNote}</li>
           </ul>
-          <img src="/infographics/work-firm.png" alt="Two advisers discussing evidence at a table" className="mt-8 h-52 w-full rounded-2xl object-cover" />
+          <img src="/infographics/work-firm.png" alt="Bhutanese advisers in gho and kira discussing evidence" className="mt-8 h-52 w-full rounded-2xl object-cover" />
         </div>
         <Card>
           <CardContent>

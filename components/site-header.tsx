@@ -118,13 +118,13 @@ function MegaPanel({ locale, menu }: { locale: string; menu: MenuKey }) {
           </div>
         ) : null}
         {menu === "firm" ? (
-          <FeatureCard locale={locale} href="/about" image="/infographics/work-firm.png" alt="Two advisers discussing evidence at a table" eyebrow="About the firm" title="Rooted in Bhutan. Engaged with the world." text={firm.description} />
+          <FeatureCard locale={locale} href="/about" image="/infographics/work-firm.png" alt="Bhutanese advisers in gho and kira discussing evidence" eyebrow="About the firm" title="Rooted in Bhutan. Engaged with the world." text={firm.description} />
         ) : null}
         {menu === "services" ? (
-          <FeatureCard locale={locale} href="/services" image="/infographics/work-services.png" alt="A workshop combining data, climate, and people" eyebrow="All services" title="Five practices, one advisory firm." text="Economics, climate, inclusion, delivery, and partnerships." />
+          <FeatureCard locale={locale} href="/services" image="/infographics/work-services.png" alt="Bhutanese colleagues in a workshop on data, climate, and people" eyebrow="All services" title="Five practices, one advisory firm." text="Economics, climate, inclusion, delivery, and partnerships." />
         ) : null}
         {menu === "insights" ? (
-          <FeatureCard locale={locale} href="/insights" image="/infographics/work-insights.png" alt="Research notes and charts on a desk" eyebrow="Latest thinking" title="From evidence to decisions." text="Financing nature, inclusive green growth, and policy coherence." />
+          <FeatureCard locale={locale} href="/insights" image="/infographics/work-insights.png" alt="A Bhutanese researcher writing beside charts" eyebrow="Latest thinking" title="From evidence to decisions." text="Financing nature, inclusive green growth, and policy coherence." />
         ) : null}
       </div>
     </div>

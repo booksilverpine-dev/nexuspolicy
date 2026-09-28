@@ -97,7 +97,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       <section id="story" className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <img src="/infographics/work-firm.png" alt="Two advisers discussing evidence at a table" className="h-56 w-full rounded-2xl object-cover sm:h-72" />
+        <img src="/infographics/work-firm.png" alt="Bhutanese advisers in gho and kira discussing evidence" className="h-56 w-full rounded-2xl object-cover sm:h-72" />
         <div>
           <h2 className="font-serif text-3xl text-[#14382c]">Our story</h2>
           <p className="mt-3 leading-7 text-[#3d5248]">{about.story}</p>

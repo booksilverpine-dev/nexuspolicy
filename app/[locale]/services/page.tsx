@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { services } from "@/content/site";
 import { engagementSteps } from "@/content/pages";
 import { PracticeMap, StepRail } from "@/components/visuals";
+import { ServicesVisuals } from "@/components/services-visuals";
 import { loc } from "@/lib/paths";
 
 export const metadata: Metadata = { title: "Services" };
@@ -17,6 +18,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
         <p className="mt-4 text-[#3d5248]">Today&apos;s challenges do not exist in isolation. Economic transformation influences employment. Climate risks affect investment. Social inclusion shapes long-term outcomes. The firm organizes its work across five practices that are commissioned separately and read together when the decision requires it.</p>
       </header>
       <PracticeMap />
+      <ServicesVisuals locale={locale} />
       <section className="grid gap-4 md:grid-cols-2">
         {services.map((service, index) => (
           <Link key={service.slug} href={loc(locale, `/services/${service.slug}`)}>

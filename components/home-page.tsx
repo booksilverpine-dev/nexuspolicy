@@ -16,7 +16,7 @@ export async function HomePage({ locale, labels }: { locale: string; labels: Rec
   return (
     <div>
       <section className="relative min-h-[540px] overflow-hidden">
-        <img src="/infographics/work-hero.png" alt="Advisers reviewing charts in a policy meeting" className="absolute inset-0 h-full w-full object-cover" />
+        <img src="/infographics/work-hero.png" alt="Bhutanese advisers in national dress reviewing charts in a policy meeting" className="absolute inset-0 h-full w-full object-cover" />
         <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
           <div className="max-w-xl rounded-2xl bg-[#f6f3ec]/85 p-6">
             <h1 className="font-serif text-4xl leading-tight text-[#14382c] md:text-5xl">Bridging Policy, People and Planet for a Sustainable Tomorrow</h1>
