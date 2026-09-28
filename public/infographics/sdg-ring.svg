@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="SDG progress 72 of 100">
+<circle cx="40" cy="40" r="30" fill="none" stroke="#e6e0d6" stroke-width="8"/>
+<circle cx="40" cy="40" r="30" fill="none" stroke="#1aa3a3" stroke-width="8" stroke-linecap="round" stroke-dasharray="135.7 188.5" transform="rotate(-90 40 40)"/>
+<text x="40" y="44" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#14382c">72</text>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-label="We serve as a bridge">
+<rect x="16" y="16" width="250" height="40" rx="8" fill="#fff" stroke="#14382c"/>
+<text x="141" y="42" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#14382c">Evidence</text>
+<text x="360" y="42" text-anchor="middle" font-size="16" fill="#e36b1e">↔</text>
+<rect x="454" y="16" width="250" height="40" rx="8" fill="#14382c"/>
+<text x="579" y="42" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#f6f3ec">Policy</text><rect x="16" y="68" width="250" height="40" rx="8" fill="#fff" stroke="#14382c"/>
+<text x="141" y="94" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#14382c">Strategy</text>
+<text x="360" y="94" text-anchor="middle" font-size="16" fill="#e36b1e">↔</text>
+<rect x="454" y="68" width="250" height="40" rx="8" fill="#14382c"/>
+<text x="579" y="94" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#f6f3ec">Implementation</text><rect x="16" y="120" width="250" height="40" rx="8" fill="#fff" stroke="#14382c"/>
+<text x="141" y="146" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#14382c">Growth</text>
+<text x="360" y="146" text-anchor="middle" font-size="16" fill="#e36b1e">↔</text>
+<rect x="454" y="120" width="250" height="40" rx="8" fill="#14382c"/>
+<text x="579" y="146" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#f6f3ec">Sustainability</text><rect x="16" y="172" width="250" height="40" rx="8" fill="#fff" stroke="#14382c"/>
+<text x="141" y="198" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#14382c">Communities</text>
+<text x="360" y="198" text-anchor="middle" font-size="16" fill="#e36b1e">↔</text>
+<rect x="454" y="172" width="250" height="40" rx="8" fill="#14382c"/>
+<text x="579" y="198" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#f6f3ec">Institutions</text><rect x="16" y="224" width="250" height="40" rx="8" fill="#fff" stroke="#14382c"/>
+<text x="141" y="250" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#14382c">Bhutanese experience</text>
+<text x="360" y="250" text-anchor="middle" font-size="16" fill="#e36b1e">↔</text>
+<rect x="454" y="224" width="250" height="40" rx="8" fill="#14382c"/>
+<text x="579" y="250" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#f6f3ec">International knowledge</text>
+</svg>

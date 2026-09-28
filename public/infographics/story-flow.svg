@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 120" role="img" aria-label="Bhutan to global impact">
+<rect x="20" y="28" width="160" height="64" rx="12" fill="#fff" stroke="#14382c"/>
+<text x="100" y="66" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#14382c">Bhutan</text>
+<path d="M184 60 H204" stroke="#e36b1e" stroke-width="2" marker-end="url(#arrow)"/><rect x="212" y="28" width="160" height="64" rx="12" fill="#fff" stroke="#14382c"/>
+<text x="292" y="66" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#14382c">Knowledge</text>
+<path d="M376 60 H396" stroke="#e36b1e" stroke-width="2" marker-end="url(#arrow)"/><rect x="404" y="28" width="160" height="64" rx="12" fill="#fff" stroke="#14382c"/>
+<text x="484" y="66" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#14382c">Solutions</text>
+<path d="M568 60 H588" stroke="#e36b1e" stroke-width="2" marker-end="url(#arrow)"/><rect x="596" y="28" width="160" height="64" rx="12" fill="#fff" stroke="#14382c"/>
+<text x="676" y="66" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#14382c">Partnerships</text>
+<path d="M760 60 H780" stroke="#e36b1e" stroke-width="2" marker-end="url(#arrow)"/><rect x="788" y="28" width="160" height="64" rx="12" fill="#14382c" stroke="#14382c"/>
+<text x="868" y="66" text-anchor="middle" font-size="14" font-family="Calibri, sans-serif" fill="#f6f3ec">Global Impact</text>
+
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#e36b1e"/></marker></defs>
+</svg>

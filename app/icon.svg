@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+<title id="title">Eco Policy Nexus International</title>
+<path d="M 32 32 L 32.00 1.00 A 31 31 0 0 1 53.92 10.08 Z" fill="#e23d32"/><path d="M 32 32 L 53.92 10.08 A 31 31 0 0 1 63.00 32.00 Z" fill="#f07820"/><path d="M 32 32 L 63.00 32.00 A 31 31 0 0 1 53.92 53.92 Z" fill="#f2c14e"/><path d="M 32 32 L 53.92 53.92 A 31 31 0 0 1 32.00 63.00 Z" fill="#3c9a46"/><path d="M 32 32 L 32.00 63.00 A 31 31 0 0 1 10.08 53.92 Z" fill="#1aa3a3"/><path d="M 32 32 L 10.08 53.92 A 31 31 0 0 1 1.00 32.00 Z" fill="#2f6fe8"/><path d="M 32 32 L 1.00 32.00 A 31 31 0 0 1 10.08 10.08 Z" fill="#5b4db8"/><path d="M 32 32 L 10.08 10.08 A 31 31 0 0 1 32.00 1.00 Z" fill="#9a3d96"/>
+<circle cx="32" cy="32" r="18" fill="#f4d36a" stroke="#c8962e" stroke-width="1.5"/>
+<circle cx="32" cy="32" r="6.84" fill="#fff6d8"/>
+</svg>
